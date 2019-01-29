@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{full}}
+        <button @click="change">点击</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                first: 'hello',
+                last: 'world'
+            },
+            methods: {
+                change(){
+                    this.full = "verygood"
+                }
+            },
+            computed: {
+                full: {
+                    //计算属性默认只有 getter
+                    get() {
+                        return this.first + this.last
+                    },
+                    set(val) {
+                        // console.log(val)
+                        let arr = val.split('')
+                        console.log(val)
+                        console.log(arr);
+                        this.first = arr[0]
+                        this.last = arr[1]
+
+                    }
+                    //通过vm.full重新赋值,会触发computed里面的get和set
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
