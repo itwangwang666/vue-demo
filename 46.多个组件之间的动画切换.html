@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .fade-enter,
+        .fade-leave-to{
+            opacity: 0;
+        }
+        .fade-enter-active,
+        .fade-leave-active{
+            transition: all 0.8s;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition name=fade mode="out-in">
+            <component :is="flag"></component>
+        </transition>
+        <button @click="change">点击切换</button>
+    </div>
+    <script>
+        let child1 = {
+            template:'<div>我是组件1</div>'
+        }
+        let child2 = {
+                template: '<div>我是组件2</div>'
+            }
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag:'child1'
+            },
+            methods: {
+                change(){
+                    this.flag = this.flag==='child1'?'child2':'child1'
+                }
+            },
+            components:{
+                child1,
+                child2
+            }
+        })
+    </script>
+</body>
+</html>
