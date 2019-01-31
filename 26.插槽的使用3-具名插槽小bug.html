@@ -9,19 +9,19 @@
 </head>
 <body>
     <div id="app">
-        <child :content="10"></child>
+        <contents>
+            <header>我是头部header</header>
+            <footer>我是底部footer</footer>
+        </contents>
     </div>
     <script>
-        Vue.component("child",{
-            // props: {
-            //     content: String
-            //     //父组件传递过来的是一个数字,子组件需要一个字符串
-            //     //会报错警告
-            // },
-            props:{
-                content:[Number,String]     //表示只能接受数字,字符串类型
-            },
-            template:"<div>{{content}}</div>"
+        Vue.component('contents',{
+            template:
+            `<div>
+                <slot></slot>
+                <div>我是主体部分</div>
+                <slot></slot>
+            </div>`
         })
         var vm = new Vue({
             el: '#app',

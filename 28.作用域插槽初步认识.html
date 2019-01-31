@@ -9,20 +9,22 @@
 </head>
 <body>
     <div id="app">
-        <child :content="10"></child>
+        <child></child>
     </div>
     <script>
-        Vue.component("child",{
-            // props: {
-            //     content: String
-            //     //父组件传递过来的是一个数字,子组件需要一个字符串
-            //     //会报错警告
-            // },
-            props:{
-                content:[Number,String]     //表示只能接受数字,字符串类型
+        let child = {
+            data(){
+                return {
+                    list:[1,2,3,4]
+                }
             },
-            template:"<div>{{content}}</div>"
-        })
+            template:
+            `<div>
+                <ul>
+                    <li v-for="item of list">{{item}}</li>
+                </ul>
+            </div>`
+        }
         var vm = new Vue({
             el: '#app',
             data: {
@@ -30,6 +32,9 @@
             },
             methods: {
     
+            },
+            components:{
+                child
             }
         })
     </script>
